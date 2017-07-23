@@ -2,18 +2,28 @@ module FableVue
 
 open Fable.Core
 open Fable.Core.JsInterop
+open Fable.Helpers.Vue
 open Fable.Import
+open System
 
-let init() =
-    let canvas = Browser.document.getElementsByTagName_canvas().[0]
-    canvas.width <- 1000.
-    canvas.height <- 800.
-    let ctx = canvas.getContext_2d()
-    // The (!^) operator checks and casts a value to an Erased Union type
-    // See http://fable.io/docs/interacting.html#Erase-attribute
-    ctx.fillStyle <- !^"rgb(200,0,0)"
-    ctx.fillRect (10., 10., 55., 50.)
-    ctx.fillStyle <- !^"rgba(0, 0, 200, 0.5)"
-    ctx.fillRect (30., 30., 55., 50.)
+let (~%) = createObj
 
-init()
+type Component = { id: string }
+type AsyncComponent = { id: string }
+type VNode = obj
+
+// #2: VNodeData
+// #3: VNodeChildren
+type CreateElement = U3<string, Component, AsyncComponent> -> obj -> U2<string, VNode>[] -> VNode
+
+type AppViewModel() =
+    let mutable text = "Hello, World!"
+
+    member __.render(h: CreateElement) =
+        h !^"div" %[] [|
+            !^(h !^"h1" %[] [| !^text |])
+            !^(h !^"button" %[ "on" ==> %[ "click" ==> (fun _ -> text <- "bla!") ] ] [| !^"Kliki!" |])
+        |]
+
+let extraOpts = %[]
+let app = mount(AppViewModel(), extraOpts, "#app")
