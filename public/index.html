@@ -1,14 +1,28 @@
 <!doctype html>
 <html>
     <head>
-        <title>Fable: Hacking Vue.js</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8">
+
+        <title>Vue.js + Fable • TodoMVC</title>
+
         <link rel="shortcut icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
         <link rel="shortcut icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
     </head>
     <body>
-        <div id="app"></div>
+        <link rel="stylesheet" href="css/todomvc/base.css">
+        <link rel="stylesheet" href="css/todomvc/index.css">
+
+        <script src="css/todomvc/base.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.runtime.js"></script>
+
+        <section class="todoapp"></section>
+
+        <footer class="info">
+            <p>Double-click to edit a todo</p>
+            <p>Created by <a href="http://github.com/petehunt/">petehunt</a> and <a href="http://github.com/alfonsogarciacaro/">alfonsogarciacaro</a></p>
+            <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+        </footer>
+
         <script src="bundle.js"></script>
     </body>
 </html>
